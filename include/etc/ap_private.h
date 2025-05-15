@@ -74,7 +74,7 @@ DataType INLINE max(DataType a, DataType b) {
 } // namespace AESL_std
 
 // TODO clean up included headers.
-#include <math.h>
+#include <cmath>
 #include <stdio.h>
 #include <cassert>
 #include <cstdlib>
@@ -1590,7 +1590,7 @@ ASSIGN_OP_FROM_INT(double)
   }
 
  public:
-  INLINE ap_private() {
+  INLINE ap_private(): VAL(0) {
     set_canary();
     clearUnusedBits();
     check_canary();
@@ -3022,8 +3022,9 @@ class ap_private<_AP_W, _AP_S, false> {
 #pragma warning(disable : 4521 4522)
 #endif
  public:
-  enum { BitWidth = _AP_W, _AP_N = (_AP_W + 63) / 64 };
-  static const int width = _AP_W;
+  static constexpr uint32_t BitWidth = _AP_W;
+  static constexpr uint32_t _AP_N = (_AP_W + 63) / 64;
+  constexpr static int width = _AP_W;
 
  private:
   /// This constructor is used only internally for speed of construction of
@@ -3157,10 +3158,8 @@ class ap_private<_AP_W, _AP_S, false> {
   INLINE void set_pVal(int i, uint64_t value) { pVal[i] = value; }
 
   /// This enum is used to hold the constants we needed for ap_private.
-  enum {
-    APINT_BITS_PER_WORD = sizeof(uint64_t) * 8, ///< Bits in a word
-    APINT_WORD_SIZE = sizeof(uint64_t)          ///< Byte size of a word
-  };
+  static constexpr int APINT_BITS_PER_WORD = sizeof(uint64_t) * 8;
+  static constexpr int APINT_WORD_SIZE = sizeof(uint64_t);
 
   enum {
     excess_bits = (_AP_W % APINT_BITS_PER_WORD)
@@ -3302,6 +3301,7 @@ class ap_private<_AP_W, _AP_S, false> {
   ///  for object deserialization (pair this with the static method Read).
   INLINE ap_private() {
     set_canary();
+    memset(pVal, 0, _AP_N * sizeof(uint64_t));
     clearUnusedBits();
     check_canary();
   }

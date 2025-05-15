@@ -122,7 +122,7 @@ struct ap_int_base : public _AP_ROOT_TYPE<_AP_W, _AP_S> {
    */
   typedef typename retval<AP_MAX((_AP_W + 7) / 8, 8), _AP_S>::Type RetType;
 
-  static const int width = _AP_W;
+  constexpr static int width = _AP_W;
 
   template <int _AP_W2, bool _AP_S2>
   struct RType {
