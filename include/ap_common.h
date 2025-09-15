@@ -59,7 +59,7 @@ class half;
 // for fprintf messages.
 #include <stdio.h>
 // for exit on error.
-#include <stdlib.h>
+#include <cstdlib>
 #endif
 
 // same disable condition as assert.

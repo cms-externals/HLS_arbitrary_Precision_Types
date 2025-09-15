@@ -283,7 +283,7 @@ struct ap_fixed_base : _AP_ROOT_TYPE<_AP_W, _AP_S> {
   INLINE void report() {
     if (!_AP_S && _AP_O == AP_WRAP_SM) {
       fprintf(stderr, "ap_ufxied<...> cannot support AP_WRAP_SM.\n");
-      exit(1);
+      std::exit(1);
     }
     if (_AP_W > MAX_MODE(AP_INT_MAX_W) * 1024) {
       fprintf(stderr,
@@ -291,7 +291,7 @@ struct ap_fixed_base : _AP_ROOT_TYPE<_AP_W, _AP_S> {
               "default max value %d. Please use macro "
               "AP_INT_MAX_W to set a larger max value.\n",
               _AP_S ? "" : "u", _AP_W, MAX_MODE(AP_INT_MAX_W) * 1024);
-      exit(1);
+      std::exit(1);
     }
   }
 #else
