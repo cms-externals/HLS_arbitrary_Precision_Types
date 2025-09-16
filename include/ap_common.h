@@ -48,7 +48,7 @@ class half;
 
 #ifndef AP_ASSERT
 #ifndef __SYNTHESIS__
-#include <assert.h>
+#include <cassert>
 #define AP_ASSERT(cond, msg) assert((cond) && (msg))
 #else
 #define AP_ASSERT(cond, msg)
@@ -56,10 +56,10 @@ class half;
 #endif // ifndef AP_ASSERT
 
 #ifndef __SYNTHESIS__
-// for fprintf messages.
-#include <stdio.h>
+// for std::fprintf messages.
+#include <cstdio>
 // for exit on error.
-#include <stdlib.h>
+#include <cstdlib>
 #endif
 
 // same disable condition as assert.
@@ -68,22 +68,22 @@ class half;
 #define _AP_DEBUG(cond, ...)                  \
   do {                                        \
     if ((cond)) {                             \
-      fprintf(stderr, "DEBUG: " __VA_ARGS__); \
-      fprintf(stderr, "\n");                  \
+      std::fprintf(stderr, "DEBUG: " __VA_ARGS__); \
+      std::fprintf(stderr, "\n");                  \
     }                                         \
   } while (0)
 #define _AP_WARNING(cond, ...)                  \
   do {                                          \
     if ((cond)) {                               \
-      fprintf(stderr, "WARNING: " __VA_ARGS__); \
-      fprintf(stderr, "\n");                    \
+      std::fprintf(stderr, "WARNING: " __VA_ARGS__); \
+      std::fprintf(stderr, "\n");                    \
     }                                           \
   } while (0)
 #define _AP_ERROR(cond, ...)                  \
   do {                                        \
     if ((cond)) {                             \
-      fprintf(stderr, "ERROR: " __VA_ARGS__); \
-      fprintf(stderr, "\n");                  \
+      std::fprintf(stderr, "ERROR: " __VA_ARGS__); \
+      std::fprintf(stderr, "\n");                  \
       abort();                                \
     }                                         \
   } while (0)
