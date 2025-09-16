@@ -75,7 +75,7 @@ DataType INLINE max(DataType a, DataType b) {
 
 // TODO clean up included headers.
 #include <cmath>
-#include <stdio.h>
+#include <cstdio>
 #include <cassert>
 #include <cstdlib>
 #include <cstring>
@@ -3715,7 +3715,7 @@ class ap_private<_AP_W, _AP_S, false> {
     uint32_t numWords = AESL_std::min((int)_AP_N, _AP_N1);                     \
     uint32_t i;                                                                \
     if (_AP_W != _AP_W1)                                                       \
-      fprintf(stderr,                                                          \
+      std::fprintf(stderr,                                                          \
               "Warning! Bitsize mismach for ap_[u]int " #Sym " ap_[u]int.\n"); \
     for (i = 0; i < numWords; ++i) pVal[i] Sym RHS.get_pVal(i);                \
     if (_AP_N1 < _AP_N) {                                                      \
